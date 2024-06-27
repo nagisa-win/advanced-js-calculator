@@ -1,0 +1,23 @@
+{
+    "name": "jison-calculator",
+    "version": "1.0.2",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "start": "cd src && node app.js",
+        "make": "cd src && jison jison/calculator.jison",
+        "test": "pnpm make && pnpm start",
+        "build": "bash src/scripts/build.sh"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "jison": "^0.4.18"
+    },
+    "devDependencies": {
+        "pnpm": ">=7.0.1"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    }
+}
