@@ -30,7 +30,7 @@ cat > output/calculator.mjs << EOF
  * @build $build_time
  *
  * 不要直接修改此文件，修改calculator.jison文件，然后使用jison编译生成此文件。
- * 代码库：https://github.com/steven-dev911/advanced-js-calculator
+ * 代码库：https://github.com/nagisa-win/advanced-js-calculator
  * 编译器代码库：https://github.com/zaach/jison
  */
 
