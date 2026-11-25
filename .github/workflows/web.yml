@@ -6,7 +6,6 @@ on:
     paths:
       - "web/**"
       - "src/jison/**"
-      - "src/output/**"
       - ".github/workflows/web.yml"
   workflow_dispatch:
 
@@ -20,21 +19,26 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      # 只用 node 自带能力构建，不需要装依赖
+      # 只用 node 自带能力构建，不需要装任何依赖
       - run: node web/build.mjs
-      - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web/dist
+
+  # 部署必须单独成 job：artifact 上传后需要一点时间才能被列出来
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
       - id: deploy
         uses: actions/deploy-pages@v4
