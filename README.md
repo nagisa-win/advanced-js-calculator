@@ -277,7 +277,6 @@ cat > output/calculator.mjs << EOF
 /**
  * @file calculator.mjs
  * @description 高级计算器解析库
- * @author Steven Yan
  * @build $build_time
  *
  * 不要直接修改此文件，修改calculator.jison文件，然后使用jison编译生成此文件。
