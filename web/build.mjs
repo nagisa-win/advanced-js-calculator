@@ -3,6 +3,7 @@
  * 无第三方依赖，CI 里只需要 node。
  * 用法：node web/build.mjs
  */
+import { createHash } from "node:crypto";
 import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -25,7 +26,16 @@ function extractGrammar(source) {
 await rm(dist, { recursive: true, force: true });
 await mkdir(join(dist, "assets"), { recursive: true });
 
-await cp(join(web, "index.html"), join(dist, "index.html"));
+// 资源加内容指纹：改版后浏览器不会继续用十天前的缓存
+const hash = (buf) => createHash("sha1").update(buf).digest("hex").slice(0, 8);
+const css = await readFile(join(web, "assets/app.css"));
+const js = await readFile(join(web, "assets/app.js"));
+
+let html = await readFile(join(web, "index.html"), "utf8");
+html = html
+  .replace("assets/app.css", `assets/app.css?v=${hash(css)}`)
+  .replace("assets/app.js", `assets/app.js?v=${hash(js)}`);
+await writeFile(join(dist, "index.html"), html);
 await cp(join(web, "assets/app.css"), join(dist, "assets/app.css"));
 await cp(join(web, "assets/app.js"), join(dist, "assets/app.js"));
 
