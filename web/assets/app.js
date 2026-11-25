@@ -12,11 +12,11 @@ const symbols = parser.symbols_ || {};
 const terminals = parser.terminals_ || {};
 
 const EXAMPLES = [
-  "2 * sin(30) + 3! - sqrt(16) / (1 + 1)",
-  "2 ^ 10 % 7",
-  "log(100) + ln(E)",
+  "2 * sin(30) + 3! - √16 / (1 + 1)",
+  "3√8",
+  "(2 ^ 10) / 4",
+  "log(100) + ln(e)",
   "atan(1) * 4",
-  "(1 + 2) * (3 + 4) ^ 2",
   "170!",
 ];
 
@@ -60,8 +60,10 @@ const escapeHtml = (s) =>
 
 /** 统一在这里算值：顺带把角度制开关喂给文法里的 isDeg */
 function evaluate(expr, deg) {
+  // 文法里自然常数写作 Math.E；这里把孤立的 e 自动补全，减少无效输入
+  const normalized = expr.replace(/(?<![\w.])e(?![\w.])/g, "Math.E");
   calc.parse(`isDeg(${deg ? 1 : 0})`);
-  return calc.parse(expr);
+  return calc.parse(normalized);
 }
 
 function format(v) {
