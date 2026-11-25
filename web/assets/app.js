@@ -2,7 +2,8 @@
  * 演算台前端：直接用仓库里 jison 编译好的解析器，不引任何框架。
  * parser.mjs 由 build.mjs 从 src/output/calculator.mjs 复制而来，保证页面跑的就是仓库里的文法。
  */
-import calc from "./parser.mjs";
+// 解析器在站点根目录，与 index.html 同级
+import calc from "../parser.mjs";
 
 const $ = (sel) => document.querySelector(sel);
 
