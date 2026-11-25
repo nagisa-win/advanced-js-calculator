@@ -30,7 +30,7 @@ await cp(join(web, "assets/app.css"), join(dist, "assets/app.css"));
 await cp(join(web, "assets/app.js"), join(dist, "assets/app.js"));
 
 // 页面直接跑的解析器就是仓库里的编译产物，避免第二份实现
-await cp(join(root, "src/output/calculator.mjs"), join(dist, "parser.mjs"));
+await cp(join(web, "vendor/calculator.mjs"), join(dist, "parser.mjs"));
 
 const grammar = extractGrammar(await readFile(join(root, "src/jison/calculator.jison"), "utf8"));
 await writeFile(join(dist, "grammar.txt"), grammar + "\n");

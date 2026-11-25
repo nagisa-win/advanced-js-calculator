@@ -1,7 +1,10 @@
 /**
+ * 由 src/jison/calculator.jison 编译得到（jison 0.4.18），随站点一起发布，保证浏览器里跑的就是仓库中的文法。
+ * 重新生成：jison src/jison/calculator.jison
+ */
+/**
  * @file calculator.mjs
  * @description 高级计算器解析库
- * @author Steven Yan
  * @build 2024-02-21 14:43:13
  *
  * 不要直接修改此文件，修改calculator.jison文件，然后使用jison编译生成此文件。

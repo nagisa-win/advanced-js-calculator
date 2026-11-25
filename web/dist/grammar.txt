@@ -1,6 +1,5 @@
 /**
  * jison 编译计算器库
- * @author: Steven Yan <yanjunzhu@baidu.com>
  * 参考：https://github.com/GerHobbelt/jison
  * 安装编译库：npm install jison-gho -g
  * 编译：jison calculator.jison 生成calculator.js

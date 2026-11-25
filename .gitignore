@@ -15,4 +15,5 @@ core.*
 .env
 talos/dev.config.js
 
-src/outputweb/dist/
+src/output
+web/dist/
